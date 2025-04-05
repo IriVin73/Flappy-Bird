@@ -44,18 +44,13 @@ namespace EDP_FlappyBird
         {
 
             this.Invalidate();//refreshes the form to redraw images in new locations
-            // show the current score on the score text label
             lblScoreText.Text = "Score: " + score;
 
-            //link the  pipes left position to the pipe speed integer,
             //it will reduce the pipe speed value from the left position of the pipe image so it will move left
             foreach (Pipe pipeitem in pipes)
             {
-                //USE THE PIPE CLASS GETTER TO GET THE X POSITION AND STORE IN A NEW VARIABLE
                 int xPos = pipeitem.getPositionX();
-                //TAKE AWAY THE PIPE SPEED FROM THE NEW VARIABLE
                 xPos = xPos - pipeSpeed;
-                //USE THE PIPE CLASS SETTER TO CHANGE THE X POSITION OF THE PIPE
                 pipeitem.setPositionX(xPos);
 
             }
@@ -75,9 +70,7 @@ namespace EDP_FlappyBird
 
             }
 
-            //// link the flappy bird image to the gravity,
             //// += means it will add the speed of gravity to the images Y location so it will move down
-            //ADD CODE HERE TO INCREASE BIRDS Y POSITION USING THE GRAVITY ATTRIBUTE
             if (spacepressed)
             {
                 birdY -= gravity;
@@ -117,11 +110,9 @@ namespace EDP_FlappyBird
             Graphics Canvas = e.Graphics;
             foreach (Pipe pipeitem in pipes)
             {//loop for array of Pipe images
-             //ADD CODE HERE TO DRAW THE PIPE IMAGE FROM THE ARRAY ONTO THE SCREEN
                 Canvas.DrawImage(pipeitem.getItemImage(), pipeitem.getPositionX(), pipeitem.getPositionY(), pipeitem.getWidth(), pipeitem.getHeight());
                 
             }
-            //ADD CODE HERE TO DRAW THE BIRD IMAGE ONTO THE SCREEN USING BIRD ATTRIBUTES
             Canvas.DrawImage(bird, birdX, birdY, birdWidth, birdHeight);
         }
 
@@ -140,9 +131,6 @@ namespace EDP_FlappyBird
         private void checkCollision()
         {//check for collision between the bird and pipes by calling the detectCollision method
 
-            //UPDATE THIS METHOD SO THAT THAT IT ITERATES THROUGH THE PIPES ARRAY TO CHECK FOR COLLISION WITH EACH PIPE ITEM
-            //USE THE DETECTCOLLISION METHOD TO DETECT IF A COLLISION HAS HAPPENED (HINT: you will need to use the pipe class getters to get the values to pass in)
-            //IF A TRUE IS RETURNED THEN CALL THE ENDGAME() METHOD
             foreach (Pipe pipeitem in pipes)
             {
                 if (detectCollision(pipeitem.getPositionX(), pipeitem.getPositionY(), pipeitem.getWidth() , pipeitem.getHeight(), birdX, birdY, birdWidth, birdHeight))
